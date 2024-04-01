@@ -33,7 +33,7 @@ public class RunClass {
 				//기말고사> 중간고사 출력
 				System.out.println("------기말>중간 학생------");
 				classRoom.printScoreIncrease();
-				//반별   성적 향상률 석차 출력
+				//반별 성적 향상률 석차 출력
 				System.out.println("------성적향상률 석차------");
 				classRoom.printStudentProperties("improvementRate");
 			}
