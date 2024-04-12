@@ -34,7 +34,6 @@ public class Floor {
 			for(Player player : players) {
 				if(!enemies.isEmpty()) {
 					Enemy targetEnemy = chooseTargetEnemy(player, enemies);
-
 					damage = player.attack();
 					System.out.println(player.name + "가 " + targetEnemy.name + "에게" + damage +"데미지를 주었습니다.");
 					System.out.println(targetEnemy.name + "의 hp " + (targetEnemy.getHp()-damage));

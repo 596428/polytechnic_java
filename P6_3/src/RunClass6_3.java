@@ -1,7 +1,7 @@
 
 public class RunClass6_3 {
 	public static void main(String[] args) {
-		//System.out.println("There is as yet insufficient DATA for a meaningful answer");
+		System.out.println("There is as yet insufficient DATA for a meaningful answer");
 		ThisIsNotAGame newGame01 = new ThisIsNotAGame();
 		
 		newGame01.runGame();
