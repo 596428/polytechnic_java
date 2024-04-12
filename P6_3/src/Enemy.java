@@ -20,6 +20,7 @@ public class Enemy extends Base {
 		 this.hp -= damage;
 	        if (!super.isLive()) {
 	        	this.floor.removeEnemy(this);
+	        	System.out.println(this.name + "이 사망했습니다.");
 	        }
 		
 	}

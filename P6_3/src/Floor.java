@@ -12,11 +12,12 @@ public class Floor {
 	}
 	
 	// GameState에서 실행되는 메서드, enemy 객체들을 생성하고 engageInBattle 메서드를 실행
-	public void startBattle(List<Player> players) {
+	public void runBattle(List<Player> players) {
 		this.enemies = new ArrayList<>();
-		for(int i = 0; i< players.size(); i++) {
+		for(int i = 0; i< players.size()+1; i++) {
 			this.enemies.add(new Enemy(this, i));
 		}
+		System.out.println("전투를 시작합니다.");
 		engageInBattle(players, enemies);
 	}
 	
@@ -26,22 +27,31 @@ public class Floor {
 		int damage = 0;
 		//플레이어 혹은 적의 리스트가 모두 사라질때까지 while문
 		while(!(players.isEmpty() ||enemies.isEmpty())) {
-			System.out.println((cnt+1) + "턴 시작");
+			System.out.println("-----" + (cnt+1) + "턴 시작-----");
 			// 플레이어 인덱스 순서대로, 목표 enemy를 잡고, attack 메서드로 데미지를 계산해서 underAttack으로 넘겨줌
 			// underattack에서는 데미지를 계산한 뒤 hp가 0이라면 객체 리스트에서 자기자신을 삭제함
 			// 최종적으로 어느 한쪽이 전멸하면 while문을 탈출함
 			for(Player player : players) {
-				Enemy targetEnemy = chooseTargetEnemy(player, enemies);
-				damage = player.attack();
-				targetEnemy.underAttack(damage);
+				if(!enemies.isEmpty()) {
+					Enemy targetEnemy = chooseTargetEnemy(player, enemies);
+
+					damage = player.attack();
+					System.out.println(player.name + "가 " + targetEnemy.name + "에게" + damage +"데미지를 주었습니다.");
+					System.out.println(targetEnemy.name + "의 hp " + (targetEnemy.getHp()-damage));
+					targetEnemy.underAttack(damage);
+				}
 			}
 			// 모든 플레이어가 attack 메서드를 한번씩 실행하고 나면, enemy들이 한번씩 공격함
 			for(Enemy enemy : enemies) {
-				Player targetPlayer = chooseTargetPlayer(players);
-				damage = enemy.attack();
-				targetPlayer.underAttack(damage);
-			cnt++;
+				if(!players.isEmpty()) {
+					Player targetPlayer = chooseTargetPlayer(players);
+					damage = enemy.attack();
+					System.out.println(enemy.name + "가 " + targetPlayer.name + "에게" + damage +"데미지를 주었습니다.");
+					System.out.println(targetPlayer.name + "의 hp " + (targetPlayer.getHp()-damage));
+					targetPlayer.underAttack(damage);
+				}
 			}
+			cnt++;
 		}
 
 	}

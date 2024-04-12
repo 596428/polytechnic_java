@@ -15,9 +15,9 @@ public class GameState {
 		for(int i=0; i< maxFloor; i++) {
 			this.floors.add(new Floor("floor" + (i+1)));
 		}
-    	
     	this.players = new ArrayList<>();
 		for (int i = 0; i< playerCount; i++) {
+			System.out.println((i+1) + "번 캐릭터를 생성합니다.");
             Role role = checkPlayerRole(); // 직업 선택하는 메서드
             System.out.println("캐릭터의 이름을 입력하세요.");
             String inputTxt = s.nextLine();
@@ -52,10 +52,12 @@ public class GameState {
     
     // 게임 루프 시작
     public void climbingFloors() {
+    	System.out.println("\n던전으로 들어갑니다...\n");
     	for(Floor floor : floors) {
     		if (!isGameOver()) {
-    			System.out.println(floor.floorName);
-    			floor.startBattle(players);
+    			System.out.println("-----" + floor.floorName + "-----");
+    			floor.runBattle(players);
+    			System.out.println(floor.floorName + " clear\n");
     		}
     	}
     }
