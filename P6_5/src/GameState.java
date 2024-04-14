@@ -29,7 +29,7 @@ public class GameState {
     	for(Floor floor : floors) {
     		if (!isGameOver()) {
     			System.out.println("-----" + floor.floorName + "-----");
-    			floor.runBattle(players);
+    			floor.runBattle(players, floors.indexOf(floor), floors.size());
     			System.out.println(floor.floorName + " closed");
     		}
     	}

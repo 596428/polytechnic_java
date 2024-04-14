@@ -1,6 +1,10 @@
 
 public class Enemy extends Base {
 	private Floor floor;
+	int maxHp;
+	
+	public Enemy() {
+	}
 	
 	public Enemy(Floor floor, int i) {
 		this.floor = floor;

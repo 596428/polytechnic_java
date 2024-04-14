@@ -10,5 +10,4 @@ public class RunClass6_3 {
 //		atk 메서드 skill 클래스로 분리
 //		보스 디자인
 	}
-	
 }

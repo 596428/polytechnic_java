@@ -13,7 +13,7 @@ public class GameState {
     public void initializeGame(int maxFloor, int playerCount) {
     	this.floors = new ArrayList<>();
 		for(int i=0; i< maxFloor; i++) {
-			this.floors.add(new Floor("floor" + (i+1)));
+			this.floors.add(new Floor("Floor"+ (i+1)));
 		}
     	this.players = new ArrayList<>();
 		for (int i = 0; i< playerCount; i++) {
@@ -56,7 +56,7 @@ public class GameState {
     	for(Floor floor : floors) {
     		if (!isGameOver()) {
     			System.out.println("-----" + floor.floorName + "-----");
-    			floor.runBattle(players);
+    			floor.runBattle(players, floors.indexOf(floor), floors.size());
     			System.out.println(floor.floorName + " clear\n");
     		}
     	}

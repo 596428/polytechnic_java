@@ -5,24 +5,15 @@ public class Player extends Base {
 	Role role;
 
 	public Player(GameState gameState, String name, Role role) {
-		super();
 		this.gameState = gameState;
 		this.name = name;
 		this.role = role;
 	}
 
 	public int attack() {
-
-		return 55;
+		return 38;
 	}
 
-	public int attack() {
-		return 55;
-	}
-
-	public int attack() {
-		return 55;
-	}
 
 	@Override
 	public void underAttack(int damage) {

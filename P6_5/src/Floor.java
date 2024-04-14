@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Floor {
 	String floorName;
+	int currentfloor;
 	private List<Enemy> enemies;
 	Scanner s =  new Scanner(System.in);
 	
@@ -12,10 +13,16 @@ public class Floor {
 	}
 	
 	// GameState에서 실행되는 메서드, enemy 객체들을 생성하고 engageInBattle 메서드를 실행
-	public void runBattle(List<Base> players) {
+	public void runBattle(List<Base> players, int floorIndex, int floorSize) {
 		this.enemies = new ArrayList<>();
-		for(int i = 0; i< 5; i++) {
-			this.enemies.add(new Enemy(this, i));
+		this.currentfloor = floorIndex+1;
+		if(currentfloor == floorSize) {
+			System.out.println("보스 출현");
+			this.enemies.add(new SlimeBoss(this));
+		}else {
+			for(int i = 0; i< 5; i++) {
+				this.enemies.add(new Enemy(this, i));
+			}
 		}
 		System.out.println("전투를 시작합니다.");
 		engageInBattle(players, enemies);
@@ -70,7 +77,10 @@ public class Floor {
         return targetPlayer;
     }
 	
-	// enemy는 floor에서 생성되기 때문에, enemy 객체의 삭제 역시 floor에서 처리함
+	// enemy는 floor에서 생성되기 때문에, enemy 객체의 추가와 삭제 역시 floor에서 처리함
+	public void addEnemy(Enemy enemy) {
+    	enemies.add(enemy);
+    }
 	public void removeEnemy(Enemy enemy) {
     	enemies.remove(enemy);
     }
