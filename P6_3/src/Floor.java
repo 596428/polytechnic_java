@@ -53,7 +53,8 @@ public class Floor {
 				}
 			}
 			// 모든 플레이어가 attack 메서드를 한번씩 실행하고 나면, enemy들이 한번씩 공격함
-			for(Enemy enemy : enemies) {
+			List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+			for(Enemy enemy : enemiesCopy) {
 				if(!players.isEmpty()) {
 					Player targetPlayer = chooseTargetPlayer(players);
 					damage = enemy.attack();

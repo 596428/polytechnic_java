@@ -1,11 +1,11 @@
 
 public class SlimeBoss extends Boss{
-	private Floor floor;
+	public Floor floor;
 	
 	public SlimeBoss(Floor floor) {
 		this.floor = floor;
 		this.name = "대왕 슬라임";
-		this.hp = 250;
+		this.hp = 300;
 		this.maxHp = hp;
 	}
 	@Override
@@ -17,7 +17,7 @@ public class SlimeBoss extends Boss{
 	    		 slimeBoss.name = "분열된 슬라임";
 	    		 slimeBoss.hp = this.hp;
 	    		 slimeBoss.maxHp = 100;
-	    		 slimeBoss.floor = this.floor; // 이거 왜필요한거임???
+	    		 //slimeBoss.floor = this.floor; // 이게 왜필요한거임?
 	    		 this.floor.addEnemy(slimeBoss);
 	    		 this.floor.removeEnemy(this); 
 	    	 }

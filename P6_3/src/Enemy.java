@@ -12,14 +12,14 @@ public class Enemy extends Base {
 	}
 	
 	public int attack() {
-		return 11;
+		return 1;
 	};
 	
 	@Override
 	public void underAttack(int damage) {
 		 this.hp -= damage;
 	     if (!super.isLive()) {
-	        this.floor.removeEnemy(this);
+	        floor.removeEnemy(this);
 	        System.out.println(this.name + "이 사망했습니다.");
 	     }
 		

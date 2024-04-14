@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ThisIsNotAGame {
 	private GameState gameState;
-	private static final int maxFloor = 3;
+	private static final int maxFloor = 1;
 	private static final int playerCount = 1;
 	Scanner scanner = new Scanner(System.in);	
 	

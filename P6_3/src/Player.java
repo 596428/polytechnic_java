@@ -11,7 +11,7 @@ public class Player extends Base {
 	}
 
 	public int attack() {
-		return 38;
+		return 66;
 	}
 
 

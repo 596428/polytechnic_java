@@ -1,6 +1,6 @@
 
 public class Enemy extends Base {
-	private Floor floor;
+	protected Floor floor;
 	int maxHp;
 	
 	public Enemy() {

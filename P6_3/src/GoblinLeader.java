@@ -1,7 +1,6 @@
-import java.util.List;
 
 public class GoblinLeader extends Boss {
-	private Floor floor;
+	public Floor floor;
 	int damageCount = 0;
 	int goblinCount = 10;
 	
@@ -9,7 +8,6 @@ public class GoblinLeader extends Boss {
 		this.floor = floor;
 		this.name = "고블린 리더";
 		this.hp = 250;
-		this.maxHp = hp;
 	}
 	
 	@Override
@@ -18,8 +16,7 @@ public class GoblinLeader extends Boss {
 			System.out.println("고블린 소환");
 			Enemy enemy = new Enemy(this.floor, goblinCount);
 			enemy.name = "부하 고블린"+ (11-goblinCount);
-			enemy.hp = this.hp;
-			enemy.floor = this.floor;
+			enemy.hp = 30;
 			this.floor.addEnemy(enemy);
 			damageCount -=2;
 			goblinCount -=1;
