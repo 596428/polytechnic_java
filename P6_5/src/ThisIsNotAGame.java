@@ -15,7 +15,6 @@ public class ThisIsNotAGame {
 				System.out.println("새로운 게임을 시작하시려면 s를 눌러주세요.\n종료하시려면 q를 눌러주세요.");
 			}
 			String button = scanner.nextLine();
-			
 			if (button.equals("s")) {
 				System.out.println((i+1)+ "번째 게임을 시작합니다.");
 				createNewGame();
@@ -26,10 +25,12 @@ public class ThisIsNotAGame {
 			}
 		}
 	}
+	
 
     public void createNewGame() {
         this.gameState = new GameState();
         this.gameState.initializeGame(maxFloor);
+        
 
         if (gameState.isGameOver()) {
         	System.out.println("Game Over!\n");

@@ -12,6 +12,18 @@ public class GoblinLeader extends Boss {
 	
 	@Override
 	public int attack() {
+		summonGoblin();
+		int resultDmg = calcDmg();
+		return (resultDmg);
+	}
+	
+	@Override
+	public void underAttack(int damage) {
+	    super.underAttack(damage);
+	    damageCount++;
+	}
+	
+	public void summonGoblin() {
 		while(damageCount>=2) {
 			System.out.println("고블린 소환");
 			Enemy enemy = new Enemy(this.floor, goblinCount);
@@ -21,13 +33,10 @@ public class GoblinLeader extends Boss {
 			damageCount -=2;
 			goblinCount -=1;
 		}
-		return (20 - goblinCount);
-	};
-	
-	@Override
-	public void underAttack(int damage) {
-	    super.underAttack(damage);
-	    damageCount++;
 	}
-
+	
+	public int calcDmg() {
+		int dice = (int) (Math.random() * 6);
+		return (40 + dice*2 - (goblinCount*3));
+	}
 }

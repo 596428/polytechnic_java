@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ThisIsNotAGame {
 	private GameState gameState;
-	private static final int maxFloor = 1;
+	private static final int maxFloor = 3;
 	private static final int playerCount = 1;
 	Scanner scanner = new Scanner(System.in);	
 	
@@ -32,7 +32,7 @@ public class ThisIsNotAGame {
         // initializeGame 메서드로 floor와 player 객체를 생성함
         this.gameState.initializeGame(maxFloor, playerCount);
         // climbingFloors 안쪽에서 게임 루프 실행
-        this.gameState.climbingFloors();
+
 
 
         //패배조건 : 모든 플레이어가 사망했다면

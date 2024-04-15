@@ -24,7 +24,10 @@ public class GameState {
             Player player = new Player(this, inputTxt, role);
             this.players.add(player);
         }
+		climbingFloors();
     }
+    
+
 
     
     // 이용자가 플레이어의 직업을 입력하는 메서드
@@ -50,7 +53,7 @@ public class GameState {
     	return Role.values()[inputRoleNum];
     }
     
-    // 게임 루프 시작
+ // 게임 루프 시작
     public void climbingFloors() {
     	System.out.println("\n던전으로 들어갑니다...\n");
     	for(Floor floor : floors) {
@@ -61,6 +64,7 @@ public class GameState {
     		}
     	}
     }
+    
     
     //player는 GameState에서 생성되기 때문에, player의 삭제 역시 GameState에서 처리함
     public void removePlayer(Player player) {

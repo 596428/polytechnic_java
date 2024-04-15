@@ -12,7 +12,7 @@ public class Enemy extends Base {
 	}
 	
 	public int attack() {
-		return 28;
+		return 11;
 	}
 
 

@@ -11,21 +11,30 @@ public class Floor {
 	Floor(String name){
 		this.floorName = name;
 	}
-	
+	  
 	// GameState에서 실행되는 메서드, enemy 객체들을 생성하고 engageInBattle 메서드를 실행
 	public void runBattle(List<Base> players, int floorIndex, int floorSize) {
+		createEnemy(players, floorIndex, floorSize); //적 개체 생성
+		System.out.println("전투를 시작합니다.");
+		engageInBattle(players, enemies); // 플레이어 혹은 적이 전멸할때까지 while문 실행
+	}
+	
+	
+	
+	public List<Enemy> createEnemy(List<Base> players, int floorIndex, int floorSize){
 		this.enemies = new ArrayList<>();
 		this.currentfloor = floorIndex+1;
 		if(currentfloor == floorSize) {
 			System.out.println("보스 출현");
-			this.enemies.add(new SlimeBoss(this));
+			Enemy slimeBoss = new SlimeBoss(this);
+			//slimeBoss.floor = this;
+			this.enemies.add(slimeBoss);
 		}else {
-			for(int i = 0; i< 5; i++) {
+			for(int i = 0; i< players.size()+1; i++) {
 				this.enemies.add(new Enemy(this, i));
 			}
 		}
-		System.out.println("전투를 시작합니다.");
-		engageInBattle(players, enemies);
+		return enemies;
 	}
 	
 	
@@ -36,30 +45,106 @@ public class Floor {
 		//플레이어 혹은 적의 리스트가 모두 사라질때까지 while문
 		while(!(players.isEmpty() ||enemies.isEmpty())) {
 			System.out.println("-----" + (cnt+1) + "턴 시작-----");
-			// enemy 객체들의 리스트 출력하는 for문이고, 필요에 따라 copy paste 하시거나 옮기거나 삭제하셔도 됩니다.
+			// enemy 객체들의 리스트 출력하는 for문
 			for (Enemy enemy : enemies) {
-	    		System.out.println(enemies.indexOf(enemy) + ". " + enemy.name);
+	    		System.out.println(enemies.indexOf(enemy) + ". " + enemy.name + " hp: " + enemy.hp);
 	        }
-			//TODO
-			//플레이어가 enemy를 공격하는 로직을 작성해주세요.
-			//enemy 객체는 복수 존재합니다. 어떤 객체를 공격할지 결정하는 단계도 작성하셔야 합니다.
-			//while문이 한번 돌때마다 한번 attack 메소드를 실행하도록 하면 됩니다.
-			//서로다른 attack 메소드를 여러개(atk01, atk02...) 작성하셨다면, 다양한 방식으로 공격해도 괜찮습니다.
-
 			
-			// 모든 enemy 객체들이 각자 1번씩 플레이어를 공격하는 for문
-			for(Enemy enemy : enemies) {
-				if(!players.isEmpty()) {
-					Base targetPlayer = chooseTargetPlayer(players);
-					damage = enemy.attack();
-					System.out.println(enemy.name + "가 " + targetPlayer.name + "에게" + damage +"데미지를 주었습니다.");
-					System.out.println(targetPlayer.name + "의 hp " + (targetPlayer.hp-damage));
-					targetPlayer.underAttack(damage);
+			//작성자 : 김지수
+			for (Base player : players) {
+                if (!enemies.isEmpty()) {
+                    damage = 0;
+                    Enemy targetEnemy = chooseEnemy(enemies);
+
+                    if (player instanceof Minji) {
+                        damage = ((Minji) player).attack();
+                        targetEnemy.underAttack(damage);
+                        System.out.println(player.name + "가 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+                        System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);
+                    } else if (player instanceof Hanni) {
+                    	damage = ((Hanni) player).attack();
+                    	targetEnemy.underAttack(damage);
+                    	System.out.println(player.name + "가 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+                    	System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);                    	
+                    } else if (player instanceof Haerin) {
+	                	damage = ((Haerin) player).attack();
+	                	targetEnemy.underAttack(damage);
+	                	System.out.println(player.name + "이 " + targetEnemy.name + "에게 " + damage + "데미지를 주었습니다.");
+	                	System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);                    	
+	                }
+                }
+            }
+			
+			//작성자:권동운
+			for(Base player : players ) {
+				if(!enemies.isEmpty()){
+					Base targetEnemy = chooseTargetEnemy(enemies);
+					if(player instanceof Quokka) {
+						damage = ((Quokka)player).attack();
+					}
+					System.out.println(player.name + "가" + targetEnemy.name + "에게" + damage + "데미지를 주었습니다." );
+					System.out.println(targetEnemy.name + "의 hp" + (targetEnemy.hp - damage));
+					targetEnemy.underAttack(damage);
 				}
 			}
+			
+			//작성자 : 백지욱
+			for(Base player : players ) {
+				if(!enemies.isEmpty()){
+					Base targetEnemy = chooseTargetEnemy(enemies);
+					if(player instanceof Player) {
+						damage = ((Player)player).attack();
+					}
+					System.out.println(player.name + "가" + targetEnemy.name + "에게" + damage + "데미지를 주었습니다." );
+					System.out.println(targetEnemy.name + "의 hp" + (targetEnemy.hp - damage));
+					targetEnemy.underAttack(damage);
+				}
+			}
+			
+			// 모든 enemy 객체들이 각자 1번씩 플레이어를 공격하는 메서드
+			startEnemyTurn(players, enemies);
 			cnt++;
 		}
 
+	}
+	
+	//작성자 : 김지수
+	private Enemy chooseEnemy(List<Enemy> enemies) {
+        Enemy targetEnemy = enemies.get(0);
+        for (Enemy enemy : enemies) {
+            if (enemy.hp < targetEnemy.hp) {
+                targetEnemy = enemy;
+            } else if (enemy.hp == targetEnemy.hp && enemies.indexOf(enemy) < enemies.indexOf(targetEnemy)) {
+                targetEnemy = enemy;
+            }
+        }
+        return targetEnemy;
+    }
+	
+	//작성자 : 권동운
+	private Base chooseTargetEnemy(List<Enemy> enemies) {
+		// TODO Auto-generated method stub
+		Base targetEnemy = enemies.get(0);
+		for(Enemy enemy : enemies) {
+			if(enemy.hp <targetEnemy.hp ) {
+				targetEnemy = enemy;
+			} else if (enemy.hp == targetEnemy.hp && enemies.indexOf(enemy) > enemies.indexOf(targetEnemy)) {
+				targetEnemy = enemy;
+			}
+		}
+		return targetEnemy;
+	}
+	
+	public void startEnemyTurn(List<Base> players, List<Enemy> enemies) {
+		for(Enemy enemy : enemies) {
+			if(!players.isEmpty()) {
+				Base targetPlayer = chooseTargetPlayer(players);
+				int damage = enemy.attack();
+				System.out.println(enemy.name + "가 " + targetPlayer.name + "에게" + damage +"데미지를 주었습니다.");
+				System.out.println(targetPlayer.name + "의 hp " + (targetPlayer.hp-damage));
+				targetPlayer.underAttack(damage);
+			}
+		}
 	}
 	
 	
@@ -77,7 +162,7 @@ public class Floor {
         return targetPlayer;
     }
 	
-	// enemy는 floor에서 생성되기 때문에, enemy 객체의 추가와 삭제 역시 floor에서 처리함
+
 	public void addEnemy(Enemy enemy) {
     	enemies.add(enemy);
     }

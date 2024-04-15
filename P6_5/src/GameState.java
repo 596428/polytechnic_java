@@ -11,30 +11,49 @@ public class GameState {
 	
 	// 정해진 만큼의 floor 객체, player 객체 생성
     public void initializeGame(int maxFloor) {
+    	createFloor(maxFloor);
+    	createPlayer();
+        climbingFloors();
+    }
+    
+    
+    public List<Floor> createFloor(int maxFloor){
     	this.floors = new ArrayList<>();
 		for(int i=0; i< maxFloor; i++) {
 			this.floors.add(new Floor("floor" + (i+1)));
 		}
+		return floors;
+    }
+    
+    public List<Base> createPlayer(){
     	this.players = new ArrayList<>();
-    	// TODO
-    	// Player 클래스를 다 작성했다면 여기에 객체를 추가해야 합니다.
-    	// 객체 생성하고 추가하는 방법은 아래와 같습니다.
-    	// Base 객체이름 = new 클래스이름(this);
-    	// this.players.add(객체이름);
-    	Base player = new Player(this);
-        this.players.add(player);
-        
-        //게임 루프 시작
-        System.out.println("\n던전으로 들어갑니다...\n");
+    	//작성자 : 김지수
+    	Base minji = new Minji(this);
+        Base hanni = new Hanni(this);
+        Base haerin = new Haerin(this);
+        players.add(minji);
+        players.add(hanni);
+        players.add(haerin);
+        //작성자 : 권동운
+        Base player01 = new Quokka(this, 0);
+		this.players.add(player01);
+        //작성자 : 백지욱
+		Base player02 = new Player(this, 0);
+		this.players.add(player02);
+		return players;
+    }
+    
+    public void climbingFloors() {
+    	System.out.println("\n던전으로 들어갑니다...\n");
     	for(Floor floor : floors) {
     		if (!isGameOver()) {
     			System.out.println("-----" + floor.floorName + "-----");
     			floor.runBattle(players, floors.indexOf(floor), floors.size());
-    			System.out.println(floor.floorName + " closed");
+    			System.out.println(floor.floorName + " closed\n");
     		}
     	}
     }
-    
+      
     
     //player는 GameState에서 생성되기 때문에, player의 삭제 역시 GameState에서 처리함
     public void removePlayer(Base player) {

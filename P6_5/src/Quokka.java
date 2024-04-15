@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Player extends Base {
+public class Quokka extends Base {
 	private GameState gameState;
 
 
@@ -9,27 +9,26 @@ public class Player extends Base {
 	//캐릭터의 이름을 새롭게 설정하시고, 공격시 이름이 출력되게 해 주세요.
 	//enemy에게 공격할수있는 attack 메소드를 하나 이상, 공격을 받았을때 실행되는 underAttack 메소드를 하나 작성해야 합니다.
 	//underAttack 메소드 안에는 캐릭터의 hp가 0이 되었을 때 객체 자기자신을 삭제하도록 하는 메소드가 포함되어야 합니다.
-	public Player(GameState gameState, int i) {
+	public Quokka(GameState gameState, int i) {
 		this.gameState = gameState;
-		this.name = "마늘" ;
+		this.name = "쿼카";
 	}
-//ㅇ어택 클레스 따로만들었는데 적용 안되묘...
 	public int attack() {
 		Random random = new Random();
-		int randomAttck = random.nextInt(2);
-		if(randomAttck == 0) {
-			System.out.println("마늘이 갈릭딥핑을 뿌렸습니다.");
-			return 25;
-		}else {
-			System.out.println("마늘이 육쪽 마늘빵을 던졌습니다.");
+		int i = random.nextInt(2);
+		if(i == 0 ) {
+			System.out.println("쿼카가 행복한 웃음 공격을 했습니다.");
 			return 35;
+		}else {
+			System.out.println("쿼카가 열매를 던졌습니다.");
+			return 25;
 		}
 	}
 
 	@Override
 	public void underAttack(int damage) {
 		this.hp -= damage;
-		if (!super.isLive()) {
+		if (!isLive()) {
 			this.gameState.removePlayer(this);
 			System.out.println(this.name + "이(가) 사망했습니다.");
 		}

@@ -16,14 +16,17 @@ public class Floor {
 	public void runBattle(List<Player> players, int floorIndex, int floorSize) {
 		this.enemies = new ArrayList<>();
 		this.currentfloor = floorIndex+1;
+		
 		if(currentfloor == floorSize) {
 			System.out.println("보스 출현");
-			Enemy SlimeBoss = new SlimeBoss(this);
-			this.enemies.add(SlimeBoss);
+			Enemy slimeBoss = new SlimeBoss(this);
+			slimeBoss.floor = this;
+			this.enemies.add(slimeBoss);
 		}else if(currentfloor == Math.round((double)floorSize/(double)2)) {
 			System.out.println("중간보스 출현");
-			Enemy GoblinLeader = new GoblinLeader(this);
-			this.enemies.add(GoblinLeader);
+			Enemy goblinLeader = new GoblinLeader(this);
+			goblinLeader.floor = this;
+			this.enemies.add(goblinLeader);
 		}else {
 			for(int i = 0; i< players.size()+1; i++) {
 				this.enemies.add(new Enemy(this, i));
@@ -57,7 +60,7 @@ public class Floor {
 			for(Enemy enemy : enemiesCopy) {
 				if(!players.isEmpty()) {
 					Player targetPlayer = chooseTargetPlayer(players);
-					damage = enemy.attack();
+					damage = enemy.attack(); //int형 
 					System.out.println(enemy.name + "가 " + targetPlayer.name + "에게" + damage +"데미지를 주었습니다.");
 					System.out.println(targetPlayer.name + "의 hp " + (targetPlayer.getHp()-damage));
 					targetPlayer.underAttack(damage);
