@@ -11,9 +11,9 @@ public class GameState {
 	
 	// 정해진 만큼의 floor 객체, player 객체 생성
     public void initializeGame(int maxFloor) {
-    	createFloor(maxFloor);
-    	createPlayer();
-        climbingFloors();
+    	createFloor(maxFloor); // 층 객체 생성
+    	createPlayer(); // 플레이어 객체 생성
+    	climbingFloors(); // 게임 루프 실행
     }
     
     
@@ -47,9 +47,9 @@ public class GameState {
     	System.out.println("\n던전으로 들어갑니다...\n");
     	for(Floor floor : floors) {
     		if (!isGameOver()) {
-    			System.out.println("-----" + floor.floorName + "-----");
+    			System.out.println("------" + floor.floorName + "------");
     			floor.runBattle(players, floors.indexOf(floor), floors.size());
-    			System.out.println(floor.floorName + " closed\n");
+    			System.out.println("\n" + floor.floorName + " closed\n");
     		}
     	}
     }
