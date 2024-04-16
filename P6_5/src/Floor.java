@@ -30,7 +30,7 @@ public class Floor {
 			//slimeBoss.floor = this;
 			this.enemies.add(slimeBoss);
 		}else {
-			for(int i = 0; i< players.size()+1; i++) {
+			for(int i = 0; i< players.size(); i++) {
 				this.enemies.add(new Enemy(this, i));
 			}
 		}

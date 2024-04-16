@@ -29,7 +29,7 @@ public class SlimeBoss extends Boss{
 	
 	// 분열 메서드
 	public void binaryFission() {
-		if(hp>0 && hp < maxHp*0.45) {
+		if(hp>0 && hp < maxHp*0.5) {
 	    	 for (int i = 0; i < 2; i++) {
 	    		 Enemy slimeBoss = new SlimeBoss(this.floor);
 	    		 slimeBoss.name = "분열된 슬라임";
