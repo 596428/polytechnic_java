@@ -7,7 +7,7 @@ public class ThisIsNotAGame {
 	Scanner scanner = new Scanner(System.in);	
 	
 	public void runGame() {
-		System.out.println("0416 과제 : This is definitely not A SLS");
+		System.out.println("0416 과제 : This is definitively not A SLS");
 		for (int i=0; i<999; i++) {
 			if(i==0) {	
 				System.out.println("시작하시려면 s, 종료하시려면 q를 눌러주세요.");	

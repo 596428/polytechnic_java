@@ -13,6 +13,9 @@ public class GameState {
     public void initializeGame(int maxFloor) {
     	createFloor(maxFloor); // 층 객체 생성
     	createPlayer(); // 플레이어 객체 생성
+    	for (Base player : players) {
+    		System.out.println(players.indexOf(player) + ". " + player.name + " hp: " + player.hp);
+    	}
     	climbingFloors(); // 게임 루프 실행
     }
     

@@ -13,7 +13,7 @@ public class Player extends Base {
 		this.gameState = gameState;
 		this.name = "마늘" ;
 	}
-//ㅇ어택 클레스 따로만들었는데 적용 안되묘...
+
 	public int attack() {
 		Random random = new Random();
 		int randomAttck = random.nextInt(2);

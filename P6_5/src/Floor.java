@@ -44,7 +44,7 @@ public class Floor {
 		int damage = 0;
 		//플레이어 혹은 적의 리스트가 모두 사라질때까지 while문
 		while(!(players.isEmpty() ||enemies.isEmpty())) {
-			System.out.println("\n------" + (cnt+1) + "턴 시작------");
+			System.out.println("-----" + (cnt+1) + "턴 시작-----");
 			// enemy 객체들의 리스트 출력하는 for문
 			for (Enemy enemy : enemies) {
 	    		System.out.println(enemies.indexOf(enemy) + ". " + enemy.name + " hp: " + enemy.hp);

@@ -3,7 +3,7 @@ public class SlimeBoss extends Boss{
 	
 	public SlimeBoss(Floor floor) {
 		this.name = "대왕 슬라임";
-		this.hp = 400;
+		this.hp = 500;
 		this.maxHp = hp;
 		this.floor = floor;
 	}
@@ -20,6 +20,7 @@ public class SlimeBoss extends Boss{
 	    binaryFission();
 	}
 	
+	
 	public int calcDmg() {
 		int dice = (int) (Math.random() * 9);
 		int result = 50 + dice;
@@ -33,7 +34,7 @@ public class SlimeBoss extends Boss{
 	    		 Enemy slimeBoss = new SlimeBoss(this.floor);
 	    		 slimeBoss.name = "분열된 슬라임";
 	    		 slimeBoss.hp = this.hp;
-	    		 slimeBoss.maxHp = 120;
+	    		 slimeBoss.maxHp = 110;
 	    		 //slimeBoss.floor = this.floor; // 이게 왜필요한거임?
 	    		 this.floor.addEnemy(slimeBoss);
 	    		 this.floor.removeEnemy(this); 
