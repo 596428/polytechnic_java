@@ -12,7 +12,7 @@ public class Floor {
 		this.floorName = name;
 	}
 	  
-	// GameState에서 실행되는 메서드, enemy 객체들을 생성하고 engageInBattle 메서드를 실행
+	// GameState에서 실행되는 메서드, enemy 객체들을 생성하고 전투 돌입
 	public void runBattle(List<Base> players, int floorIndex, int floorSize) {
 		createEnemy(players, floorIndex, floorSize); //적 개체 생성
 		System.out.println("전투를 시작합니다.");
@@ -44,7 +44,7 @@ public class Floor {
 		int damage = 0;
 		//플레이어 혹은 적의 리스트가 모두 사라질때까지 while문
 		while(!(players.isEmpty() ||enemies.isEmpty())) {
-			System.out.println("-----" + (cnt+1) + "턴 시작-----");
+			System.out.println("\n-----" + (cnt+1) + "턴 시작-----");
 			// enemy 객체들의 리스트 출력하는 for문
 			for (Enemy enemy : enemies) {
 	    		System.out.println(enemies.indexOf(enemy) + ". " + enemy.name + " hp: " + enemy.hp);
@@ -73,31 +73,32 @@ public class Floor {
 	                	System.out.println(targetEnemy.name + "의 남은 hp: " + targetEnemy.hp);                    	
 	                }
                 }
+                
             }
 			
 			//작성자:권동운
 			for(Base player : players ) {
 				if(!enemies.isEmpty()){
-					Base targetEnemy = chooseTargetEnemy(enemies);
+					Base targetEnemy01 = chooseTargetEnemy(enemies);
 					if(player instanceof Quokka) {
 						damage = ((Quokka)player).attack();
+						System.out.println(player.name + "가" + targetEnemy01.name + "에게" + damage + "데미지를 주었습니다." );
+						System.out.println(targetEnemy01.name + "의 hp" + (targetEnemy01.hp - damage));
+						targetEnemy01.underAttack(damage);
 					}
-					System.out.println(player.name + "가" + targetEnemy.name + "에게" + damage + "데미지를 주었습니다." );
-					System.out.println(targetEnemy.name + "의 hp" + (targetEnemy.hp - damage));
-					targetEnemy.underAttack(damage);
 				}
 			}
 			
 			//작성자 : 백지욱
 			for(Base player : players ) {
 				if(!enemies.isEmpty()){
-					Base targetEnemy = chooseTargetEnemy(enemies);
+					Base targetEnemy02 = chooseTargetEnemy(enemies);
 					if(player instanceof Player) {
 						damage = ((Player)player).attack();
+						System.out.println(player.name + "가" + targetEnemy02.name + "에게" + damage + "데미지를 주었습니다." );
+						System.out.println(targetEnemy02.name + "의 hp" + (targetEnemy02.hp - damage));
+						targetEnemy02.underAttack(damage);
 					}
-					System.out.println(player.name + "가" + targetEnemy.name + "에게" + damage + "데미지를 주었습니다." );
-					System.out.println(targetEnemy.name + "의 hp" + (targetEnemy.hp - damage));
-					targetEnemy.underAttack(damage);
 				}
 			}
 			
