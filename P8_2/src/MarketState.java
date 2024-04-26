@@ -34,6 +34,7 @@ public class MarketState {
 		products.add(new Product(input1, input2, input3, input4));
 	}
 	
+	
 	public void printProducts() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("정렬기준 입력 : 1.price 오름차순, 2. price 내림차순\n 3. discountRate 오름차순, 4. discountRate 내름차순");
@@ -54,6 +55,7 @@ public class MarketState {
 		}
 	}
 	
+	
 	public void calcAvgPrice() {
 		int length = products.size();
 		System.out.println("총 상품 수는" + length +"개 입니다.");
@@ -61,7 +63,8 @@ public class MarketState {
 		for (Product product : products) {
 			sumPrice += product.getPrice();
 		}
-		int avgPrice = sumPrice / length;
+		int avgPrice = 0;
+		if(products.size()!=0) avgPrice = sumPrice / length;
 		System.out.println("평균 가격은" + avgPrice + "입니다.");
 	}
 
@@ -141,11 +144,18 @@ public class MarketState {
 		}
 		System.out.println("상품명:");
 		String name = scanner.nextLine();
-		System.out.println("재고:");
-		int stock = scanner.nextInt();
+		
 		for (Product product : products) {
 			if(name.equals(product.getProperty("name"))) {
-				product.setStock(stock);
+				 try {
+					 System.out.println("재고:");
+					 int stock = scanner.nextInt();
+					 product.setStock(stock);
+				 } catch (InputMismatchException e) {
+					 System.out.println("숫자를 입력해주세요.");
+				     scanner.nextLine();
+				     return;
+				 }
 			}
 		}
 	}
