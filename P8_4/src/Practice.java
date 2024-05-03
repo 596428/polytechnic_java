@@ -12,7 +12,7 @@ public class Practice {
 	    String resultTxt = sb.toString();
 	    System.out.println(resultTxt);
 	    
-	    //placeQueen(8,4,4);
+	    placeQueen(8,5,5);
 	    int[] arr = {0,2,1,3,2,0,4,4};
 		int num = 0;
 		solution03(arr,num);
@@ -23,9 +23,7 @@ public class Practice {
 		Arrays.sort(arr);
 		if(arr[0]!=num) count++;
 		for (int i=0; i<arr.length-1; i++) {
-			if(arr[i] != arr[i+1] && arr[i+1] != num ) {
-				count +=1;
-			}
+			count += (arr[i] != arr[i+1] && arr[i+1] != num) ? 1 : 0;
 		}
 		System.out.println(count);
 		return count;
@@ -36,15 +34,13 @@ public class Practice {
         int r = 0;
         int big = Math.max(n, m);;
         int small = Math.min(n, m);
-    	System.out.println(big);
-    	System.out.println(small);
         while(small!=0){
             r = big%small;
             big=small;
             small=r;
         }
-        answer[0]=big;
-        answer[1]=(n*m)/big;
+        answer[0]=big; // 최대공약수
+        answer[1]=(n*m)/big; // 최소공배수
         return answer;
     }
 	
@@ -59,19 +55,19 @@ public class Practice {
         return answer + n;
     }
 	
-	public static void placeQueen(int x, int y, int z) {
-	       String[][] arr = new String[x][x];
-	       for(int i=0; i<x; i++) {
-	          for(int j=0; j<x; j++) {
-	             if(i==y || j==z || i+j==y+z || i-j==y-z) {
-	                arr[i][j] = "0";
+	public static void placeQueen(int size, int x, int y) {
+	       int[][] arr = new int[size][size];
+	       for(int i=0; i<size; i++) {
+	          for(int j=0; j<size; j++) {
+	             if(i==x || j==y || i+j==x+y || i-j==x-y) {
+	                arr[i][j] = 1;
 	             }
-	             else arr[i][j] = "*";
+	             //else arr[i][j] = " ";
 	             System.out.print(arr[i][j] + " ");
 	          }System.out.println();
 	       }
 	}
-	//count += (arr[i] != arr[i+1] && arr[i+1] != num) ? 1 : 0;
+	
 
 	
 }
